@@ -18,10 +18,11 @@
 
 from omxplayer import OMXPlayer
 import shelve
+import os
+from time import sleep
 
 def main():
     play_video()
-    inc_video_index()
     play_video()
 
 def play_video():
@@ -41,6 +42,22 @@ def play_video():
 
     print "play " + videos[video_index]
 
+    videofile = os.path.abspath(os.getcwd()) + "/video/" + videos[video_index]
+
+    print videofile
+
+    player = OMXPlayer(videofile, args=['--no-osd', '--no-keys', '-b'])
+
+    player.play()
+
+    while 1:
+        try:
+            print player.playback_status()
+        except:
+            print "error end"
+            player.quit()
+            return
+        
 def inc_video_index():
     db = shelve.open('datastore', 'c')
 
