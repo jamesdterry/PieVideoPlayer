@@ -1,0 +1,4 @@
+
+sudo pip install cherrypy
+sudo pip install pickledb
+sudo pip install simplejson
